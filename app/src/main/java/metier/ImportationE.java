@@ -18,14 +18,14 @@ import java.util.ArrayList;
  * Created by vbobet on 01/12/2017.
  */
 
-public class Importation extends AsyncTask<String, Void, ArrayList<Livre>>{
+public class ImportationE extends AsyncTask<String, Void, ArrayList<Exemplaire>>{
 
     @Override
-    protected ArrayList<Livre> doInBackground(String... urls) {
+    protected ArrayList<Exemplaire> doInBackground(String... urls) {
         URL url;
         String ligne;
         try{
-            ArrayList<Livre> listeImportee;
+            ArrayList<Exemplaire> listeImportee;
             url = new URL(String.valueOf(urls[0]));
             InputStream is = url.openConnection().getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
@@ -34,7 +34,7 @@ public class Importation extends AsyncTask<String, Void, ArrayList<Livre>>{
             Log.i("Objet","lignge : "+ligne);
             Gson gson = new Gson();
             listeImportee = gson.fromJson(ligne,
-                    new TypeToken<ArrayList<Livre>>(){}.getType());
+                    new TypeToken<ArrayList<Exemplaire>>(){}.getType());
             Log.i("Objet","listImport : "+listeImportee.get(0));
             return listeImportee;
         } catch (MalformedURLException e){

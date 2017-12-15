@@ -1,9 +1,13 @@
 package com.example.vbobet.bilbliotheque;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -18,9 +22,9 @@ public class ListeLivres extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_livres);
-        ListView listLivres = (ListView) findViewById(R.id.listLivres);
         Importation tacheImport = new Importation();
-        tacheImport.execute("fichier d'import");
+        tacheImport.execute("http://10.0.2.2:3000/android/");
+        ListView listLivres = (ListView) findViewById(R.id.listLivres);
         try{
             ArrayList<Livre> listeImportee = tacheImport.get();
             if(listeImportee!=null){
@@ -28,6 +32,8 @@ public class ListeLivres extends AppCompatActivity {
                 adapter= new ListeLivresAdapter(getApplicationContext(), listeImportee);
                 listLivres.setAdapter(adapter);
                 Log.i("Parseur", "ok");
+
+                listLivres.setOnItemClickListener(observateurClickItem);
             }
             else {
                 Log.i("Parseur", "Problèmes lors de la lecteur du ficher");
@@ -38,4 +44,16 @@ public class ListeLivres extends AppCompatActivity {
             Log.i("Parseur", "Erreur execution " +e.getMessage());
         }
     }
+
+    private AdapterView.OnItemClickListener observateurClickItem = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent i;
+            i = new Intent(getApplicationContext(), Detail.class);
+            i.putExtra("Livre",((Livre) parent.getItemAtPosition(position)).getTitre());
+            startActivity(i);
+        }
+    };
+
 }
+

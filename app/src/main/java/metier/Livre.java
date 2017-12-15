@@ -7,27 +7,33 @@ package metier;
 public class Livre {
 
 
-    private String titre;
-    private String resume;
-    private Auteur lAuteur;
-    private String ISBN;
+    private String _titre;
+    private String _resume;
+    private String _ISBN;
+    private String _auteur;
 
+    public Livre(String unTitre, String unResume, String unIsbn,String unAuteur){
+        _titre = unTitre;
+        _resume = unResume;
+        _ISBN = unIsbn;
+        _auteur = unAuteur;
+    }
 
 
     public String getTitre() {
-        return titre;
+        return _titre;
     }
 
     public String getResume() {
-        return resume;
+        return _resume;
     }
 
-    public Auteur getlAuteur() {
-        return lAuteur;
+    public String getlAuteur() {
+        return _auteur;
     }
 
     public String getISBN() {
-        return ISBN;
+        return _ISBN;
     }
 
 

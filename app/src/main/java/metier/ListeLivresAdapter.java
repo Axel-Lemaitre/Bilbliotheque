@@ -1,6 +1,7 @@
 package metier;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,8 @@ public class ListeLivresAdapter extends BaseAdapter{
         }
         Livre livre = this.getItem(position);
         titre.setText(livre.getTitre());
-        auteur.setText(livre.getlAuteur().getNom());
+        auteur.setText(livre.getlAuteur());
+        Log.i("Objet", "rseult = "+livre.getlAuteur());
         return convertView;
     }
 }
